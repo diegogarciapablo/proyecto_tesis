@@ -1,0 +1,23 @@
+.container{
+	position: relative;
+	top: 30px;
+	width: 90%;
+	height: auto;
+	margin: auto;
+	background-image: url("fondo.jpg");
+}
+.container .list-image{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;													
+}
+.container .list-image li{
+	margin-right:10px;
+	margin-bottom:10px;		
+	margin-top: 10px;					
+}
+.container .list-image li img{
+	position: relative;
+	width: 500px;
+	height: 250px;													
+}

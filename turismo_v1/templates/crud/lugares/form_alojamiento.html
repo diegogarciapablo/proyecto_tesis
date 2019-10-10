@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Agregar lugar de Alojamiento</title>
+</head>
+<body>
+<form method="POST">
+{% csrf_token %}
+
+{{ var_alojamiento.as_p }}
+
+<button type="submit">Crear</button>
+	
+</form>
+</body>
+</html>

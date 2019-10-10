@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<title>Agregar datos de Colegio</title>
+</head>
+<body>
+<form method="POST">
+{% csrf_token %}
+
+{{ var_cole.as_p }}
+
+<button type="submit">Crear</button>
+</form>
+</body>
+</html>

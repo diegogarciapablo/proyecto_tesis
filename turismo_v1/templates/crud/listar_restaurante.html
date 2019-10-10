@@ -29,6 +29,7 @@
   					<td>{{restaurante.cod_ubicacion}}</td>
             <td>
               <a href="{% url 'crud:editar_restaurante' restaurante.cod_restaurante %}">Editar</a>
+              <a href="{% url 'crud:eliminar_restaurante' restaurante.cod_restaurante %}">Eliminar</a>
             </td>
   				</tr>
   			{% endfor %}  			

@@ -1,7 +1,7 @@
 
 from django.urls import path
 from .views import paso1,AñadirLugar, CrearColegio, CrearIglesia, CrearAlojamiento, CrearPlaza,CrearRestaurante, ListarColegio, ListarPlaza, ListarRestaurante, ListarAlojamiento, ListarIglesia, EditarColegio, EditarIglesia, EditarAlojamiento, EditarPlaza, EditarRestaurante
-from .views import EliminarColegio
+from .views import EliminarColegio, EliminarIglesia, EliminarPlaza, EliminarRestaurante, EliminarAlojamiento
 
 urlpatterns = [
 	path('add_lugar/',AñadirLugar, name='alugar'),
@@ -25,4 +25,8 @@ urlpatterns = [
 	path('editar_restaurante/<int:cod_restaurante>',EditarRestaurante, name='editar_restaurante'),
 
 	path('eliminar_colegio/<int:cod_colegio>',EliminarColegio, name='eliminar_colegio'),
+	path('eliminar_iglesia/<int:cod_iglesia>',EliminarIglesia, name='eliminar_iglesia'),
+	path('eliminar_plaza/<int:cod_plaza>',EliminarPlaza, name='eliminar_plaza'),
+	path('eliminar_restaurante/<int:cod_restaurante>',EliminarRestaurante, name='eliminar_restaurante'),
+	path('eliminar_alojamiento/<int:cod_alojamiento>',EliminarAlojamiento, name='eliminar_alojamiento'),
 ]

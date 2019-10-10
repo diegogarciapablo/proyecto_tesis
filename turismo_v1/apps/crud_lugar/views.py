@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .form_lugar import FormLugar, FormSchool, FormChurch, FormLodgings, FormSquare, FormRestaurant
 from .models import colegio, iglesia, plaza, restaurante, alojamiento
-from  django.core.exceptions import ObjectDoesNotExist 
+from  django.core.exceptions import ObjectDoesNotExist
 
 def paso1(request):
 	return render(request,'crud/choice_add.html')
@@ -198,9 +198,30 @@ def EditarRestaurante(request, cod_restaurante):
 	return render(request,'crud/lugares/form_restaurante.html', {'var_restau': var_restau, 'error': error})
 
 
-
-
 def EliminarColegio(request, cod_colegio):
 	var_cole = colegio.objects.get(cod_colegio=cod_colegio)
 	var_cole.delete()
-	return redirect('crud:listar_colegio')
+	return redirect('crud:list_colegio')
+
+
+def EliminarIglesia(request, cod_iglesia):
+	var_iglesia = iglesia.objects.get(cod_iglesia=cod_iglesia)
+	var_iglesia.delete()
+	return redirect('crud:list_iglesia')
+
+
+def EliminarPlaza(request, cod_plaza):
+	var_plaza = plaza.objects.get(cod_plaza=cod_plaza)
+	var_plaza.delete()
+	return redirect('crud:list_plaza')
+
+
+def EliminarRestaurante(request, cod_restaurante):
+	var_restau = restaurante.objects.get(cod_restaurante=cod_restaurante)
+	var_restau.delete()
+	return redirect('crud:list_restaurante')
+
+def EliminarAlojamiento(request, cod_alojamiento):
+	var_alojamiento = alojamiento.objects.get(cod_alojamiento=cod_alojamiento)
+	var_alojamiento.delete()
+	return redirect('crud:list_alojamiento')

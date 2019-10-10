@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from apps.mapa_main.views import Home,Mapa,Tour
-from apps.crud_lugar.views import añadirlugar,paso1
+from apps.crud_lugar.views import AñadirLugar,paso1
 
 
 urlpatterns = [
@@ -25,5 +25,5 @@ urlpatterns = [
     path('',Home,name='index'),
     path('mapa/',Mapa,name='mapa'),
     path('tour/',Tour,name='recorrido'),
-    path('adminstrador/', include (('apps.crud_lugar.urls','crud'))),
+    path('administrador/', include (('apps.crud_lugar.urls','crud'))),
 ]

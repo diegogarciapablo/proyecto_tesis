@@ -29,6 +29,7 @@
   					<td>{{alojamiento.cod_ubicacion}}</td>
             <td>
               <a href="{% url 'crud:editar_alojamiento' alojamiento.cod_alojamiento %}">Editar</a>
+              <a href="{% url 'crud:eliminar_alojamiento' alojamiento.cod_alojamiento %}">Eliminar</a>
             </td>
   				</tr>
   			{% endfor %}  			

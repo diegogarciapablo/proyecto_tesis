@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .form_lugar import FormLugar, FormSchool, FormChurch, FormLodgings
+from .form_lugar import FormLugar, FormSchool, FormChurch, FormLodgings, FormSquare, FormRestaurant
 
 def paso1(request):
 	return render(request,'crud/choice_add.html')
@@ -14,11 +14,11 @@ def AñadirLugar(request):
 			if(rec_lug=='colegio'):
 				return redirect('AColegio/')
 			if (rec_lug=='plaza'):
-				return redirect('plaza.html')
+				return redirect('square/')
 			if (rec_lug=='iglesia'):
 				return redirect('church/')
 			if (rec_lug=='restaurante'):
-				return redirect('restaurante.html')
+				return redirect('restaurant/')
 			if (rec_lug=='alojamiento'):
 				return redirect('lodgings/')
 	else:
@@ -47,7 +47,7 @@ def CrearIglesia(request):
 		var_iglesia=FormChurch()
 	return render(request,'crud/lugares/form_iglesia.html',{'var_iglesia': var_iglesia})
 
-	
+
 
 def CrearAlojamiento(request):
 	if request.method=='POST':
@@ -58,3 +58,24 @@ def CrearAlojamiento(request):
 	else:
 		var_alojamiento=FormLodgings()
 	return render(request,'crud/lugares/form_alojamiento.html',{'var_alojamiento': var_alojamiento})
+
+
+def CrearPlaza(request):
+	if request.method=='POST':
+		var_plaza=FormSquare(request.POST)
+		if var_plaza.is_valid():
+			var_plaza.save()
+			return redirect(index)
+	else:
+		var_plaza=FormSquare()
+	return render(request,'crud/lugares/form_plaza.html',{'var_plaza': var_plaza})
+
+def CrearRestaurante(request):
+	if request.method=='POST':
+		var_restau=FormRestaurant(request.POST)
+		if var_restau.is_valid():
+			var_restau.save()
+			return redirect(index)
+	else:
+		var_restau=FormRestaurant()
+	return render(request,'crud/lugares/form_restaurante.html',{'var_restau': var_restau})

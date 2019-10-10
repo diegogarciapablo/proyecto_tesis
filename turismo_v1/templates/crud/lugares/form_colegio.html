@@ -7,10 +7,12 @@
 <body>
 <form method="POST">
 {% csrf_token %}
-
-{{ var_cole.as_p }}
-
-<button type="submit">Crear</button>
+ {% if error %}
+	<h2>{{ error }}</h2>
+ {% else %}
+  {{ var_cole.as_p }}
+  <button type="submit">Crear</button>
+ {% endif %}
 </form>
 </body>
 </html>

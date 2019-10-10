@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
 	<meta charset="utf-8">
 	<title>Agregar lugar de Iglesia</title>
@@ -7,11 +7,12 @@
 <body>
 <form method="POST">
 {% csrf_token %}
-
-{{ var_iglesia.as_p }}
-
-<button type="submit">Crear</button>
-	
+ {% if error %}
+	<h2>{{ error }}</h2>
+ {% else %}
+  {{ var_iglesia.as_p }}
+  <button type="submit">Crear</button>
+ {% endif %}	
 </form>
 </body>
 </html>

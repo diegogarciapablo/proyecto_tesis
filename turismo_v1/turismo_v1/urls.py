@@ -23,7 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     #path('users/',include(('apps.usuario.urls','usuario')))
     path('',Home,name='index'),
-    path('mapa/',Mapa,name='mapa'),
+    #path('mapa/',Mapa,name='mapa'),
     path('tour/',Tour,name='recorrido'),
     path('administrador/', include (('apps.crud_lugar.urls','crud'))),
 ]

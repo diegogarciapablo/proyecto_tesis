@@ -1,11 +1,10 @@
 from django.shortcuts import render, redirect
-from .form_lugar import FormLugar, FormSchool, FormChurch, FormLodgings, FormSquare, FormRestaurant
-from .models import colegio, iglesia, plaza, restaurante, alojamiento
+from .form_lugar import FormLugar, FormSchool, FormChurch, FormLodgings, FormSquare, FormRestaurant, FormEvento, FormFoto
+from .models import colegio, iglesia, plaza, restaurante, alojamiento, evento, foto, admin_agregar
 from  django.core.exceptions import ObjectDoesNotExist
 
 def paso1(request):
 	return render(request,'crud/choice_add.html')
-
 
 def AñadirLugar(request):
 	if request.method == 'POST':
@@ -33,7 +32,7 @@ def CrearColegio(request):
 		var_cole= FormSchool(request.POST)
 		if var_cole.is_valid():
 			var_cole.save()
-			return redirect(index)
+			return redirect('index')
 	else:
 		var_cole = FormSchool()
 	return render(request,'crud/lugares/form_colegio.html',{'var_cole': var_cole})
@@ -44,7 +43,8 @@ def CrearIglesia(request):
 		var_iglesia=FormChurch(request.POST)
 		if var_iglesia.is_valid():
 			var_iglesia.save()
-			return redirect(index)
+			message="Lugar Iglesia creado exitosamente"
+			return redirect('index')
 	else:
 		var_iglesia=FormChurch()
 	return render(request,'crud/lugares/form_iglesia.html',{'var_iglesia': var_iglesia})
@@ -56,7 +56,7 @@ def CrearAlojamiento(request):
 		var_alojamiento=FormLodgings(request.POST)
 		if var_alojamiento.is_valid():
 			var_alojamiento.save()
-			return redirect(index)
+			return redirect('index')
 	else:
 		var_alojamiento=FormLodgings()
 	return render(request,'crud/lugares/form_alojamiento.html',{'var_alojamiento': var_alojamiento})
@@ -67,7 +67,7 @@ def CrearPlaza(request):
 		var_plaza=FormSquare(request.POST)
 		if var_plaza.is_valid():
 			var_plaza.save()
-			return redirect(index)
+			return redirect('index')
 	else:
 		var_plaza=FormSquare()
 	return render(request,'crud/lugares/form_plaza.html',{'var_plaza': var_plaza})
@@ -77,7 +77,7 @@ def CrearRestaurante(request):
 		var_restau=FormRestaurant(request.POST)
 		if var_restau.is_valid():
 			var_restau.save()
-			return redirect(index)
+			return redirect('index')
 	else:
 		var_restau=FormRestaurant()
 	return render(request,'crud/lugares/form_restaurante.html',{'var_restau': var_restau})
@@ -225,3 +225,86 @@ def EliminarAlojamiento(request, cod_alojamiento):
 	var_alojamiento = alojamiento.objects.get(cod_alojamiento=cod_alojamiento)
 	var_alojamiento.delete()
 	return redirect('crud:list_alojamiento')
+
+
+
+def AñadirEvento(request):
+	if request.method =='POST':
+		var_evento= FormEvento(request.POST)
+		if var_evento.is_valid():
+			var_evento.save()
+			return redirect('index')
+	else:
+		var_evento = FormEvento()
+	return render(request,'crud/calendario/form_evento.html',{'var_evento': var_evento})
+
+
+def AgregarFoto(request):
+	if request.method =='POST':
+		var_foto= FormFoto(request.POST, request.FILES)
+		if var_foto.is_valid():
+			var_foto.save()
+			return redirect('index')
+	else:
+		var_foto = FormFoto()
+	return render(request,'crud/calendario/form_foto.html',{'var_foto': var_foto})
+
+
+def ListarEvento(request):
+	e_lista = evento.objects.all() 
+	return render(request,'crud/calendario/listar_evento.html',{'e_lista': e_lista})
+
+def ListarFoto(request):
+	f_lista = foto.objects.all() 
+	return render(request,'crud/calendario/listar_foto.html',{'f_lista': f_lista})
+
+def EditarEvento(request, cod_evento):
+	var_evento= None
+	error = None
+	try:
+		e_evento = evento.objects.get(cod_evento=cod_evento)
+		if request.method == 'GET':
+			var_evento = FormEvento(instance = e_evento)
+		else:
+			var_evento= FormEvento(request.POST, instance = e_evento)
+			if var_evento.is_valid():
+				var_evento.save()
+			return redirect('index')
+	except ObjectDoesNotExist as e:
+		error = e
+	return render(request, 'crud/calendario/form_evento.html',{'var_evento': var_evento, 'error': error})
+
+def EditarFoto(request, cod_foto):
+	var_foto= None
+	error = None
+	try:
+		e_foto = foto.objects.get(cod_foto=cod_foto)
+		if request.method == 'GET':
+			var_foto = FormFoto(instance = e_foto)
+		else:
+			var_foto= FormFoto(request.POST, request.Files, instance = e_foto)
+			if var_foto.is_valid():
+				var_foto.save()
+			return redirect('index')
+	except ObjectDoesNotExist as e:
+		error = e
+	return render(request, 'crud/calendario/form_foto.html',{'var_foto': var_foto, 'error': error})
+
+def EliminarEvento(request, cod_evento):
+	var_evento = evento.objects.get(cod_evento=cod_evento)
+	var_evento.delete()
+	return redirect('crud:list_evento')
+
+def EliminarFoto(request, cod_foto):
+	var_foto = foto.objects.get(cod_foto=cod_foto)
+	var_foto.delete()
+	return redirect('crud:list_foto')
+
+def MostrarMapa(request):
+	m_lista=admin_agregar.objects.all()
+	p_lista=plaza.objects.all()
+	i_lista=iglesia.objects.all()
+	r_lista=restaurante.objects.all()
+	c_lista=colegio.objects.all()
+	a_lista=alojamiento.objects.all()
+	return render(request,'mapa_main/mapa.html',{'m_lista':m_lista,'p_lista':p_lista,'i_lista':i_lista,'r_lista':r_lista,'c_lista':c_lista,'a_lista':a_lista})

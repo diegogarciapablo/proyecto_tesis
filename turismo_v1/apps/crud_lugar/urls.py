@@ -1,9 +1,10 @@
 
 from django.urls import path
 from .views import paso1,AñadirLugar, CrearColegio, CrearIglesia, CrearAlojamiento, CrearPlaza,CrearRestaurante, ListarColegio, ListarPlaza, ListarRestaurante, ListarAlojamiento, ListarIglesia, EditarColegio, EditarIglesia, EditarAlojamiento, EditarPlaza, EditarRestaurante
-from .views import EliminarColegio, EliminarIglesia, EliminarPlaza, EliminarRestaurante, EliminarAlojamiento
-
+from .views import EliminarColegio, EliminarIglesia, EliminarPlaza, EliminarRestaurante, EliminarAlojamiento,MostrarMapa
+from .views import AñadirEvento, AgregarFoto, ListarEvento, ListarFoto, EditarEvento, EditarFoto, EliminarEvento, EliminarFoto
 urlpatterns = [
+
 	path('add_lugar/',AñadirLugar, name='alugar'),
 	path('choice/',paso1, name='eleccion'),
 	path('add_lugar/AColegio/', CrearColegio, name='AColegio'),
@@ -29,4 +30,20 @@ urlpatterns = [
 	path('eliminar_plaza/<int:cod_plaza>',EliminarPlaza, name='eliminar_plaza'),
 	path('eliminar_restaurante/<int:cod_restaurante>',EliminarRestaurante, name='eliminar_restaurante'),
 	path('eliminar_alojamiento/<int:cod_alojamiento>',EliminarAlojamiento, name='eliminar_alojamiento'),
+
+
+	path('add_lugar/evento/',AñadirEvento, name='evento'),
+	path('add_lugar/img/',AgregarFoto, name='img'),
+
+	path('list_evento/',ListarEvento, name='list_evento'),
+	path('list_foto/',ListarFoto, name='list_foto'),
+
+	path('editar_evento/<int:cod_evento>',EditarEvento, name='editar_evento'),
+	path('editar_foto/<int:cod_foto>',EditarFoto, name='editar_foto'),
+
+	path('eliminar_evento/<int:cod_evento>',EliminarEvento, name='eliminar_evento'),
+	path('eliminar_foto/<int:cod_foto>',EliminarFoto, name='eliminar_foto'),
+
+	path('mapa/',MostrarMapa,name='mapa'),
+
 ]

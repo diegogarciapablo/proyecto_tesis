@@ -1,0 +1,37 @@
+{% extends 'index.html' %}
+
+{% block titulo %}
+ Listado de Imagenes
+
+ {% endblock titulo %}
+
+ {% block body %}
+
+  {% if f_lista %}
+  	<table>
+  		<thead>
+  			<tr>
+  				<th>#</th>
+  				<th>Ruta de Img</th>
+  				<th>cod foto</th>
+  			</tr>
+  		</thead>
+  		<body>
+  			{% for foto in f_lista %}
+  				<tr>
+  					<td>{{foto.cod_foto}}</td>
+  					<td>{{foto.ruta}}</td>
+  					<td>{{foto.cod_evento}}</td>
+            <td>
+              <a href="{% url 'crud:editar_foto' foto.cod_foto %}">Editar</a>
+              <a href="{% url 'crud:eliminar_foto' foto.cod_foto  %}">Eliminar</a>
+            </td>
+  				</tr>
+  			{% endfor %}  			
+  		</body>
+  	</table>
+  {% else %}
+   <h1>No existen Imagenes registrados</h1>
+  {% endif %}
+
+ {% endblock body %}
